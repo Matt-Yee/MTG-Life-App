@@ -60,8 +60,11 @@ const GameScreen = () => {
     setLifeTotals(newLifeTotals);
   };
 
-  const handleReset = () => {
-    setLifeTotals(Array(numPlayers).fill(40));
+  //TODO: fix reset so that it resets only the player's life total
+  const handleReset = (index) => {
+    const newLifeTotals = [...lifeTotals];
+    newLifeTotals[index] = 40;
+    setLifeTotals(newLifeTotals);
   };
 
   const handleBack = () => {
@@ -76,7 +79,7 @@ const GameScreen = () => {
             <LifeDisplay life={life} />
             <IncrementButton onIncrement={() => handleIncrement(index)} />
             <DecrementButton onDecrement={() => handleDecrement(index)} />
-            <ResetButton onReset={handleReset} />
+            <ResetButton onReset={() => handleReset(index)} />
           </div>
         ))}
       <BackButton onBack={handleBack} />

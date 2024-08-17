@@ -18,7 +18,7 @@ const StartScreen = () => {
   const handleStartGame = () => {
     setStarted(true);
     if (numPlayers === 0) {
-      alert("Please select the number of players.");
+      alert("Please select the number of players or resume current game.");
     } else {
       navigate("/game", { state: { numPlayers } });
     }

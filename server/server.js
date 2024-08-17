@@ -1,19 +1,18 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const port = 3001;
+import express from 'express';
+import mongoose from 'mongoose';
 
-mongoose.connect('mongodb://localhost:27017/yourDB');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/Jeggy');
 
-app.use(cors());
-app.use(bodyParser.json());
+const db = mongoose.connection;
 
-app.get('/', (req, res) => {
-    res.send('Hello World');
-});
+db.once('open', () => {
+  const app = express();
 
-app.listen(port, () => {
+  app.use(express.json());
+
+  const port = 3000;
+
+  app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
+  });
 });
